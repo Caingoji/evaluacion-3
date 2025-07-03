@@ -8,7 +8,8 @@ const initialStateVoluntario:voluntario={
   proyecto:"",
 }
 
-export default function Home(){
+export default function Home()
+{
   const miStorage = window.localStorage
   const [voluntario, setvoluntario] = useState(initialStateVoluntario)
   const [voluntarios, setvoluntarios] = useState<voluntario[]>([])
@@ -28,17 +29,17 @@ export default function Home(){
     miStorage.setItem("voluntarios",JSON.stringify([...voluntarios,voluntario]))
   }
 
-  const handleVoluntario = (name:string,value:string)=>{
-    setvoluntario(
-      {...voluntario,[name]:value}
-    )
-    if (name=="nombre" && value.length<3){
-      setnombre("el nombre debe tener minimo 3 caracteres")
-    }
-    else if(name=="nombre" && value.length>=3){
-      setnombre("")
-    }
-  }
+  const handleVoluntario = (name:string,value:string)=> {
+
+  setvoluntario({ ...voluntario, [name]: value });
+  if (name === "nombre") {
+    setnombre(value.length < 3 ? "El nombre debe tener mínimo 3 caracteres" : "");} 
+  if (name === "apellido") {
+    setapellido(value.length < 4 ? "el apellido debe tener minimo 4 caracteres" : "");} 
+  if (name === "proyecto") {
+    setproyecto(value.length < 3 ? "el proyecto debe tener un nombre que pase los 3 caracteres" : "");}
+}
+
 
   return(
     <>
@@ -50,7 +51,7 @@ export default function Home(){
       type="text"
       placeholder="Nombre" 
       onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
-      <span>{nombre}</span>
+      <span>{nombre}</span><br />
 
       <label>Apellido</label><br />
       <input 
@@ -58,7 +59,7 @@ export default function Home(){
       type="text"
       placeholder="apellido"
       onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
-      <span>{apellido} </span>
+      <span>{apellido} </span> <br />
 
       <label>Proyecto</label><br />
       <input
@@ -66,11 +67,11 @@ export default function Home(){
       type="text"
       placeholder="Nombre de su proyecto"
       onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
-      <span>{proyecto} </span>
+      <span>{proyecto} </span> <br />
       <button
       onClick={()=>{handleRegistrar()}}>Registrar</button>
     </form>
     </>
   )
 
-}
+ }
