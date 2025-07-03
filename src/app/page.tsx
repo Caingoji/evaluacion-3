@@ -6,6 +6,7 @@ const initialStateVoluntario:voluntario={
   nombre:"",
   apellido:"",
   proyecto:"",
+  resumen:""
 }
 
 export default function Home()
@@ -16,6 +17,7 @@ export default function Home()
   const [nombre, setnombre] = useState("")
   const [apellido, setapellido] = useState("")
   const [proyecto, setproyecto] = useState("")
+  const [resumen, setresumen] = useState("")
 
   useEffect(()=>{
     let listadoStr= miStorage.getItem("voluntario")
@@ -38,6 +40,8 @@ export default function Home()
     setapellido(value.length < 4 ? "el apellido debe tener minimo 4 caracteres" : "");} 
   if (name === "proyecto") {
     setproyecto(value.length < 3 ? "el proyecto debe tener un nombre que pase los 3 caracteres" : "");}
+  if (name=="resumen"){
+    setresumen(value.length < 20 ? "el resumen de su proyecto debe pasar los 20 caracteres":"")}
 }
 
 
@@ -55,7 +59,7 @@ export default function Home()
 
       <label>Apellido</label><br />
       <input 
-      name="Apellido"
+      name="apellido"
       type="text"
       placeholder="apellido"
       onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
@@ -63,11 +67,19 @@ export default function Home()
 
       <label>Proyecto</label><br />
       <input
-      name="nombre del proyecto"
+      name="proyecto"
       type="text"
       placeholder="Nombre de su proyecto"
       onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
       <span>{proyecto} </span> <br />
+      
+      <label>Resumen</label><br />
+      <input 
+      name="resumen"
+      type="text"
+      placeholder="resuma su proyecto" 
+      onChange={(e)=>{handleVoluntario(e.currentTarget.name,e.currentTarget.value)}}/><br />
+      <span>{resumen}</span>
       <button
       onClick={()=>{handleRegistrar()}}>Registrar</button>
     </form>
