@@ -6,7 +6,8 @@ const initialStateVoluntario:voluntario={
   nombre:"",
   apellido:"",
   proyecto:"",
-  resumen:""
+  resumen:"",
+  fecha:""
 }
 
 export default function Home()
@@ -43,7 +44,9 @@ export default function Home()
   if (name=="resumen"){
     setresumen(value.length < 20 ? "el resumen de su proyecto debe pasar los 20 caracteres":"")}
 }
-
+  const handleActualizar = ()=>{
+    alert("")
+  }
 
   return(
     <>
@@ -83,7 +86,11 @@ export default function Home()
       <button
       onClick={()=>{handleRegistrar()}}>Registrar</button>
     </form>
+    <form>
+      <h1>{voluntario.proyecto}{voluntario.nombre}</h1>
+    </form>
     </>
   )
 
  }
+
