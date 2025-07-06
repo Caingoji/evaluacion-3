@@ -16,43 +16,17 @@ export const MostrarProyectos = ({ traerProyecto }: Props) => {
     }, []);
 
     return (
-        <>
-            <h1>Proyectos</h1>
-            <select
-                onChange={(e) => {
-                    const index = parseInt(e.target.value);
-                    if (!isNaN(index)) traerProyecto(voluntarios[index]);
-                }}
-            >
-                <option value="">Selecciona un proyecto</option>
-                {voluntarios.map((v, index) => (
-                    <option key={index} value={index}>
-                        {v.proyecto} ({v.nombre})
-                    </option>
-                ))}
-            </select>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Proyecto</th>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {voluntarios.map((v, index) => (
-                        <tr key={index}>
-                            <td>{v.proyecto}</td>
-                            <td>{v.nombre}</td>
-                            <td>
-                                <button onClick={() => traerProyecto(v)}>Editar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </>
-    );
-};
+        <select onChange={(e) => {
+        const index = parseInt(e.target.value);
+        if (!isNaN(index)) traerProyecto(voluntarios[index]);
+        }}>
+        <option value="">Seleccione un proyecto</option>
+        {voluntarios.map((v, index) => (
+        <option key={index} value={index}>
+        {v.proyecto} ({v.nombre})
+        </option>
+        ))}
+    </select> 
+        );};
 
 export default MostrarProyectos
