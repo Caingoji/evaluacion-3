@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import {voluntario } from "./interfaces/Ivoluntario";
+import { MostrarProyectos } from "./MostrarProyectos";
 
 const initialStateVoluntario:voluntario={
   nombre:"",
@@ -21,16 +22,19 @@ export default function Home()
   const [resumen, setresumen] = useState("")
 
   useEffect(()=>{
-    let listadoStr= miStorage.getItem("voluntario")
+    let listadoStr= miStorage.getItem("voluntarios")
     if(listadoStr !=null){
       let listado = JSON.parse(listadoStr)
-      setvoluntario(listado)
+      setvoluntarios(listado)
     }
   })
 
-  const handleRegistrar=()=>{
-    miStorage.setItem("voluntarios",JSON.stringify([...voluntarios,voluntario]))
-  }
+  const handleRegistrar = () => {
+  const nuevosVoluntarios = [...voluntarios, voluntario];
+  miStorage.setItem("voluntarios", JSON.stringify(nuevosVoluntarios));
+  setvoluntarios(nuevosVoluntarios);
+  setvoluntario(initialStateVoluntario)
+}
 
   const handleVoluntario = (name:string,value:string)=> {
 
@@ -47,6 +51,8 @@ export default function Home()
   const handleActualizar = ()=>{
     alert("")
   }
+
+  const traerProyecto = ()=>{}
 
   return(
     <>
@@ -86,9 +92,23 @@ export default function Home()
       <button
       onClick={()=>{handleRegistrar()}}>Registrar</button>
     </form>
-    <form>
-      <h1>{voluntario.proyecto}{voluntario.nombre}</h1>
-    </form>
+  <form>
+  <h1>{voluntario.proyecto}{voluntario.nombre}</h1>
+  <select 
+    name="proyectoSeleccionado"
+    onChange={(e) => {
+      const proyectoSeleccionado = e.target.value;
+      console.log("Proyecto seleccionado:", proyectoSeleccionado);
+    }}
+  >
+    <option value="">Seleccione un proyecto</option>
+    {voluntarios.map((v, index) => (
+      <option key={index} value={v.proyecto}>
+        {v.proyecto} - {v.nombre}
+      </option>
+    ))}
+  </select>
+</form>
     </>
   )
 
