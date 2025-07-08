@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <>
-      <form>
+      <form className="formulario">
         <h1>{voluntario.nombre} {voluntario.apellido} {voluntario.proyecto}</h1>
 
         <label>Nombre</label><br />
@@ -115,7 +115,7 @@ export default function Home() {
         <button onClick={handleRegistrar}>Registrar</button>
       </form>
 
-      <form>
+      <form className="formulario">
         <h1>{voluntario.proyecto} {voluntario.nombre}</h1>
         <MostrarProyectos traerProyecto={traerProyecto} />
 
@@ -151,7 +151,10 @@ export default function Home() {
         )}
       </form>
 
-      <MenuEventos />
+     <div className="menu-eventos">
+      <h1>Proyectos por Evento</h1>
+  
+    </div>
     </>
   );
 }
