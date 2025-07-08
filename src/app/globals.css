@@ -15,7 +15,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #000000;
   }
 }
 
@@ -39,14 +39,14 @@ body {
 .formulario h1 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #000000;
 }
 
 .formulario label {
   font-weight: 600;
   display: block;
   margin-top: 0.75rem;
-  color: #222;
+  color: #000000;
 }
 
 .formulario input,

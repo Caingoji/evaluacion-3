@@ -23,7 +23,7 @@ export default function Home() {
   const [proyecto, setproyecto] = useState("");
   const [resumen, setresumen] = useState("");
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState<voluntario | null>(null);
-  const [editando, setEditando] = useState(false);
+  const [editando, setEditando] = useState(false);                                         //indicador de edicion
 
   useEffect(() => {
     let listadoStr = miStorage.getItem("voluntarios");
@@ -32,7 +32,7 @@ export default function Home() {
       setvoluntarios(listado);
     }
   }, []);
-
+  
   const handleRegistrar = () => {
     miStorage.setItem("voluntarios", JSON.stringify([...voluntarios, voluntario]));
     setvoluntarios([...voluntarios, voluntario]);
@@ -46,7 +46,7 @@ export default function Home() {
       setvoluntario({ ...voluntario, [name]: value });
     }
 
-    if (name === "nombre") setnombre(value.length < 3 ? "El nombre debe tener mínimo 3 caracteres" : "");
+    if (name === "nombre") setnombre(value.length < 3 ? "El nombre debe tener mínimo 3 caracteres" : "");                 //operadores ternarios
     if (name === "apellido") setapellido(value.length < 4 ? "el apellido debe tener minimo 4 caracteres" : "");
     if (name === "proyecto") setproyecto(value.length < 3 ? "el proyecto debe tener un nombre que pase los 3 caracteres" : "");
     if (name === "resumen") setresumen(value.length < 20 ? "el resumen de su proyecto debe pasar los 20 caracteres" : "");
@@ -152,7 +152,8 @@ export default function Home() {
       </form>
 
      <div className="menu-eventos">
-      <h1>Proyectos por Evento</h1>
+  
+      <MenuEventos/>
   
     </div>
     </>
