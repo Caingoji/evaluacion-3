@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { voluntario } from "./interfaces/Ivoluntario";
 import MostrarProyectos from "./MostrarProyectos";
 import MenuEventos from "./menuEventos";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "@/firebase/FireBase";
 
 const initialStateVoluntario: voluntario = {
   nombre: "",
@@ -33,11 +35,18 @@ export default function Home() {
     }
   }, []);
   
-  const handleRegistrar = () => {
-    miStorage.setItem("voluntarios", JSON.stringify([...voluntarios, voluntario]));
-    setvoluntarios([...voluntarios, voluntario]);
-    setvoluntario(initialStateVoluntario);
-  };
+  const handleRegistrar = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db, "voluntarios"), voluntario);
+    alert("Voluntario registrado en Firebase correctamente.");
+    setvoluntario(initialStateVoluntario); // limpia el formulario
+  } catch (error) {
+    console.error("Error al registrar en Firebase:", error);
+    alert("Hubo un error al registrar el voluntario.");
+  }
+};
 
   const handleVoluntario = (name: string, value: string) => {
     if (name === "integrantes") {
@@ -78,7 +87,7 @@ export default function Home() {
 
   return (
     <>
-      <form className="formulario">
+      <form onSubmit={handleRegistrar} className="formulario">
         <h1>{voluntario.nombre} {voluntario.apellido} {voluntario.proyecto}</h1>
 
         <label>Nombre</label><br />
@@ -112,7 +121,7 @@ export default function Home() {
         <label>Cantidad de Integrantes</label><br />
         <input name="integrantes" type="number" onChange={(e) => handleVoluntario(e.currentTarget.name, e.currentTarget.value)} /><br /><br />
 
-        <button onClick={handleRegistrar}>Registrar</button>
+         <button type="submit">Registrar</button>
       </form>
 
       <form className="formulario">

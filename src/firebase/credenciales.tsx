@@ -1,5 +1,3 @@
-// credenciales.ts o credenciales.js
-
 export const firebaseConfig = {
   apiKey: "AIzaSyAHR_jvV4zxyyioUWzKtA23zAz71SGrnsI",
   authDomain: "proto-2833c.firebaseapp.com",
