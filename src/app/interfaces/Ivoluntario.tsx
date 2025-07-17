@@ -6,4 +6,5 @@ export interface voluntario {
   fecha: string;
   evento: string;
   integrantes: number;
+  id?:string
 }
